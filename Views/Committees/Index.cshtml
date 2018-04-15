@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Rosu.Models.Committee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p class="btn btn-success">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.committee_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.job_description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numberOfMembers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Executive.position)
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.committee_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.job_description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numberOfMembers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Executive.studentLeader.firstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.commiteeID }, new { @class = "btn btn-default" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.commiteeID }, new { @class = "btn btn-default" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.commiteeID }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+    }
+
+</table>

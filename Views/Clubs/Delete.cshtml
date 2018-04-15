@@ -1,0 +1,56 @@
+﻿@model Rosu.Models.Club
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Club</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.clubName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.clubName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.yearFounded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.yearFounded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.industryField)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.industryField)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.clubHead1.departmentPartner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.clubHead1.departmentPartner)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

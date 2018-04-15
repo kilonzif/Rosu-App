@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Rosu.Models.clubHead>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p class="btn btn-success">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.salaryAllowance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.departmentPartner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.studentLeader.firstName)
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.salaryAllowance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.departmentPartner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.studentLeader.firstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.clubheadID }, new { @class = "btn btn-default" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.clubheadID }, new { @class = "btn btn-default" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.clubheadID }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+    }
+
+</table>

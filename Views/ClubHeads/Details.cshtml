@@ -1,0 +1,42 @@
+﻿@model Rosu.Models.clubHead
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>clubHead</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.salaryAllowance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salaryAllowance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.departmentPartner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.departmentPartner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.studentLeader.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentLeader.firstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.clubheadID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

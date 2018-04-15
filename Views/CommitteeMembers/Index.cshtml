@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Rosu.Models.CommitteeMember>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p class="btn btn-success">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.class_represented)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Committee.committee_name)
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.class_represented)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Committee.committee_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.studentID }, new { @class = "btn btn-default" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.studentID }, new { @class = "btn btn-default" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.studentID }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+    }
+
+</table>

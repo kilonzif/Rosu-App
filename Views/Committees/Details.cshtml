@@ -1,0 +1,50 @@
+﻿@model Rosu.Models.Committee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Committee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.committee_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.committee_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.job_description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.job_description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numberOfMembers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numberOfMembers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Executive.position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Executive.position)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.commiteeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

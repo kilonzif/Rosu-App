@@ -1,0 +1,42 @@
+﻿@model Rosu.Models.Executive
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Executive</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.staffPartner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.staffPartner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.studentLeader.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.studentLeader.firstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.executiveID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

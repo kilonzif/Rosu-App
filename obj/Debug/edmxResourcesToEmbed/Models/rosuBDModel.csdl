@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FKM52802019Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="asset">
+    <Key>
+      <PropertyRef Name="assetNo" />
+    </Key>
+    <Property Name="assetNo" Type="Int32" Nullable="false" />
+    <Property Name="assetname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="functionality" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="monetaryValue" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="assetManager" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Executive" Relationship="Self.FK_asset" FromRole="asset" ToRole="Executive" />
+  </EntityType>
+  <EntityType Name="Club">
+    <Key>
+      <PropertyRef Name="clubID" />
+    </Key>
+    <Property Name="clubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clubName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="yearFounded" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="clubHead" Type="Int32" Nullable="false" />
+    <Property Name="industryField" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="clubHead1" Relationship="Self.FK__Club__clubHead__2A4B4B5E" FromRole="Club" ToRole="clubHead" />
+    <NavigationProperty Name="Programs" Relationship="Self.ClubProgram" FromRole="Club" ToRole="Program" />
+  </EntityType>
+  <EntityType Name="clubHead">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="Int32" Nullable="false" />
+    <Property Name="salaryAllowance" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="departmentPartner" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Clubs" Relationship="Self.FK__Club__clubHead__2A4B4B5E" FromRole="clubHead" ToRole="Club" />
+    <NavigationProperty Name="studentLeader" Relationship="Self.FK__clubHead__studen__276EDEB3" FromRole="clubHead" ToRole="studentLeader" />
+  </EntityType>
+  <EntityType Name="Committee">
+    <Key>
+      <PropertyRef Name="commiteeID" />
+    </Key>
+    <Property Name="commiteeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="committee_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="job_description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="committee_leader" Type="Int32" Nullable="false" />
+    <Property Name="numberOfMembers" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Executive" Relationship="Self.FK__Committee__commi__1ED998B2" FromRole="Committee" ToRole="Executive" />
+    <NavigationProperty Name="CommitteeMembers" Relationship="Self.FK__Committee__membe__21B6055D" FromRole="Committee" ToRole="CommitteeMember" />
+    <NavigationProperty Name="Programs" Relationship="Self.CommitteeProgram" FromRole="Committee" ToRole="Program" />
+  </EntityType>
+  <EntityType Name="CommitteeMember">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="Int32" Nullable="false" />
+    <Property Name="memberCommittee" Type="Int32" Nullable="false" />
+    <Property Name="class_represented" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Committee" Relationship="Self.FK__Committee__membe__21B6055D" FromRole="CommitteeMember" ToRole="Committee" />
+  </EntityType>
+  <EntityType Name="Executive">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="Int32" Nullable="false" />
+    <Property Name="position" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="staffPartner" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="assets" Relationship="Self.FK_asset" FromRole="Executive" ToRole="asset" />
+    <NavigationProperty Name="Committees" Relationship="Self.FK__Committee__commi__1ED998B2" FromRole="Executive" ToRole="Committee" />
+    <NavigationProperty Name="studentLeader" Relationship="Self.FK__Executive__stude__1BFD2C07" FromRole="Executive" ToRole="studentLeader" />
+  </EntityType>
+  <EntityType Name="Program">
+    <Key>
+      <PropertyRef Name="eventID" />
+    </Key>
+    <Property Name="eventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="eventName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dateOrganized" Type="DateTime" Precision="0" />
+    <Property Name="programCost" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Clubs" Relationship="Self.ClubProgram" FromRole="Program" ToRole="Club" />
+    <NavigationProperty Name="Committees" Relationship="Self.CommitteeProgram" FromRole="Program" ToRole="Committee" />
+  </EntityType>
+  <EntityType Name="Stakeholder">
+    <Key>
+      <PropertyRef Name="stakeholderID" />
+    </Key>
+    <Property Name="stakeholderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="stakeholder_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="engagementPurpose" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dateEngaged" Type="DateTime" Precision="0" />
+    <Property Name="email" Type="String" MaxLength="320" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="studentLeaders" Relationship="Self.StudentLeaderStakeholder" FromRole="Stakeholder" ToRole="studentLeader" />
+  </EntityType>
+  <EntityType Name="studentLeader">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="Int32" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="major" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gpa" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="320" FixedLength="false" Unicode="false" />
+    <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="clubHead" Relationship="Self.FK__clubHead__studen__276EDEB3" FromRole="studentLeader" ToRole="clubHead" />
+    <NavigationProperty Name="Executive" Relationship="Self.FK__Executive__stude__1BFD2C07" FromRole="studentLeader" ToRole="Executive" />
+    <NavigationProperty Name="Stakeholders" Relationship="Self.StudentLeaderStakeholder" FromRole="studentLeader" ToRole="Stakeholder" />
+  </EntityType>
+  <EntityType Name="assetsview">
+    <Key>
+      <PropertyRef Name="assetNo" />
+      <PropertyRef Name="studentID" />
+      <PropertyRef Name="firstName" />
+      <PropertyRef Name="lastName" />
+    </Key>
+    <Property Name="assetNo" Type="Int32" Nullable="false" />
+    <Property Name="assetName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="studentID" Type="Int32" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="position" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ClubEventview">
+    <Key>
+      <PropertyRef Name="eventName" />
+    </Key>
+    <Property Name="clubName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="eventName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dateOrganized" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Clubview">
+    <Key>
+      <PropertyRef Name="industryField" />
+      <PropertyRef Name="Club_Leader" />
+    </Key>
+    <Property Name="clubName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="yearFounded" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="industryField" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Club_Leader" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommitteeEventview">
+    <Key>
+      <PropertyRef Name="eventName" />
+    </Key>
+    <Property Name="committee_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="eventName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dateOrganized" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="Committeeview">
+    <Key>
+      <PropertyRef Name="CommiteeHead" />
+      <PropertyRef Name="numberOfMembers" />
+    </Key>
+    <Property Name="committee_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="job_description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CommiteeHead" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="numberOfMembers" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="executivesView">
+    <Key>
+      <PropertyRef Name="firstname" />
+      <PropertyRef Name="lastname" />
+    </Key>
+    <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="position" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="staffPartner" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Programview">
+    <Key>
+      <PropertyRef Name="eventId" />
+      <PropertyRef Name="eventName" />
+      <PropertyRef Name="programCost" />
+    </Key>
+    <Property Name="eventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="eventName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dateOrganized" Type="DateTime" Precision="0" />
+    <Property Name="programCost" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stakeholdersview">
+    <Key>
+      <PropertyRef Name="stakeholder_name" />
+      <PropertyRef Name="engagementPurpose" />
+    </Key>
+    <Property Name="stakeholder_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="engagementPurpose" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="dateEngaged" Type="DateTime" Precision="0" />
+    <Property Name="email" Type="String" MaxLength="320" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="studentLeadersView">
+    <Key>
+      <PropertyRef Name="studentID" />
+      <PropertyRef Name="firstname" />
+      <PropertyRef Name="gender" />
+    </Key>
+    <Property Name="studentID" Type="Int32" Nullable="false" />
+    <Property Name="firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="320" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_asset">
+    <End Role="Executive" Type="Self.Executive" Multiplicity="1" />
+    <End Role="asset" Type="Self.asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Executive">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="asset">
+        <PropertyRef Name="assetManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Club__clubHead__2A4B4B5E">
+    <End Role="clubHead" Type="Self.clubHead" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Club" Type="Self.Club" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clubHead">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="Club">
+        <PropertyRef Name="clubHead" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__clubHead__studen__276EDEB3">
+    <End Role="studentLeader" Type="Self.studentLeader" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="clubHead" Type="Self.clubHead" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="studentLeader">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="clubHead">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Committee__commi__1ED998B2">
+    <End Role="Executive" Type="Self.Executive" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Committee" Type="Self.Committee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Executive">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="Committee">
+        <PropertyRef Name="committee_leader" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Committee__membe__21B6055D">
+    <End Role="Committee" Type="Self.Committee" Multiplicity="1" />
+    <End Role="CommitteeMember" Type="Self.CommitteeMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee">
+        <PropertyRef Name="commiteeID" />
+      </Principal>
+      <Dependent Role="CommitteeMember">
+        <PropertyRef Name="memberCommittee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Executive__stude__1BFD2C07">
+    <End Role="studentLeader" Type="Self.studentLeader" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Executive" Type="Self.Executive" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="studentLeader">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="Executive">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClubProgram">
+    <End Role="Club" Type="Self.Club" Multiplicity="*" />
+    <End Role="Program" Type="Self.Program" Multiplicity="*" />
+  </Association>
+  <Association Name="CommitteeProgram">
+    <End Role="Committee" Type="Self.Committee" Multiplicity="*" />
+    <End Role="Program" Type="Self.Program" Multiplicity="*" />
+  </Association>
+  <Association Name="StudentLeaderStakeholder">
+    <End Role="Stakeholder" Type="Self.Stakeholder" Multiplicity="*" />
+    <End Role="studentLeader" Type="Self.studentLeader" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="FKM52802019Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="assets" EntityType="Self.asset" />
+    <EntitySet Name="Clubs" EntityType="Self.Club" />
+    <EntitySet Name="clubHeads" EntityType="Self.clubHead" />
+    <EntitySet Name="Committees" EntityType="Self.Committee" />
+    <EntitySet Name="CommitteeMembers" EntityType="Self.CommitteeMember" />
+    <EntitySet Name="Executives" EntityType="Self.Executive" />
+    <EntitySet Name="Programs" EntityType="Self.Program" />
+    <EntitySet Name="Stakeholders" EntityType="Self.Stakeholder" />
+    <EntitySet Name="studentLeaders" EntityType="Self.studentLeader" />
+    <EntitySet Name="assetsviews" EntityType="Self.assetsview" />
+    <EntitySet Name="ClubEventviews" EntityType="Self.ClubEventview" />
+    <EntitySet Name="Clubviews" EntityType="Self.Clubview" />
+    <EntitySet Name="CommitteeEventviews" EntityType="Self.CommitteeEventview" />
+    <EntitySet Name="Committeeviews" EntityType="Self.Committeeview" />
+    <EntitySet Name="executivesViews" EntityType="Self.executivesView" />
+    <EntitySet Name="Programviews" EntityType="Self.Programview" />
+    <EntitySet Name="Stakeholdersviews" EntityType="Self.Stakeholdersview" />
+    <EntitySet Name="studentLeadersViews" EntityType="Self.studentLeadersView" />
+    <AssociationSet Name="FK_asset" Association="Self.FK_asset">
+      <End Role="Executive" EntitySet="Executives" />
+      <End Role="asset" EntitySet="assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Club__clubHead__2A4B4B5E" Association="Self.FK__Club__clubHead__2A4B4B5E">
+      <End Role="clubHead" EntitySet="clubHeads" />
+      <End Role="Club" EntitySet="Clubs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__clubHead__studen__276EDEB3" Association="Self.FK__clubHead__studen__276EDEB3">
+      <End Role="studentLeader" EntitySet="studentLeaders" />
+      <End Role="clubHead" EntitySet="clubHeads" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Committee__commi__1ED998B2" Association="Self.FK__Committee__commi__1ED998B2">
+      <End Role="Executive" EntitySet="Executives" />
+      <End Role="Committee" EntitySet="Committees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Committee__membe__21B6055D" Association="Self.FK__Committee__membe__21B6055D">
+      <End Role="Committee" EntitySet="Committees" />
+      <End Role="CommitteeMember" EntitySet="CommitteeMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Executive__stude__1BFD2C07" Association="Self.FK__Executive__stude__1BFD2C07">
+      <End Role="studentLeader" EntitySet="studentLeaders" />
+      <End Role="Executive" EntitySet="Executives" />
+    </AssociationSet>
+    <AssociationSet Name="ClubProgram" Association="Self.ClubProgram">
+      <End Role="Club" EntitySet="Clubs" />
+      <End Role="Program" EntitySet="Programs" />
+    </AssociationSet>
+    <AssociationSet Name="CommitteeProgram" Association="Self.CommitteeProgram">
+      <End Role="Committee" EntitySet="Committees" />
+      <End Role="Program" EntitySet="Programs" />
+    </AssociationSet>
+    <AssociationSet Name="StudentLeaderStakeholder" Association="Self.StudentLeaderStakeholder">
+      <End Role="Stakeholder" EntitySet="Stakeholders" />
+      <End Role="studentLeader" EntitySet="studentLeaders" />
+    </AssociationSet>
+    <FunctionImport Name="assetvalue" ReturnType="Collection(FKM52802019Model.assetvalue_Result)" />
+    <FunctionImport Name="CommitteeEvents" ReturnType="Collection(FKM52802019Model.CommitteeEvents_Result)">
+      <Parameter Name="from" Mode="In" Type="DateTime" />
+      <Parameter Name="to" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="getclassrepresentations" ReturnType="Collection(FKM52802019Model.getclassrepresentations_Result)" />
+    <FunctionImport Name="getStakeholderDetails" ReturnType="Collection(FKM52802019Model.getStakeholderDetails_Result)">
+      <Parameter Name="fromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="toDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="insertAsset">
+      <Parameter Name="assetNo" Mode="In" Type="Int32" />
+      <Parameter Name="assetname" Mode="In" Type="String" />
+      <Parameter Name="functionality" Mode="In" Type="String" />
+      <Parameter Name="monetaryValue" Mode="In" Type="Decimal" />
+      <Parameter Name="assetManager" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="insertClub">
+      <Parameter Name="clubName" Mode="In" Type="String" />
+      <Parameter Name="yearFounded" Mode="In" Type="String" />
+      <Parameter Name="clubHead" Mode="In" Type="Int32" />
+      <Parameter Name="industryField" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="insertclubHead">
+      <Parameter Name="studentID" Mode="In" Type="Int32" />
+      <Parameter Name="salaryAllowance" Mode="In" Type="Decimal" />
+      <Parameter Name="departmentPartner" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="insertClubProgram">
+      <Parameter Name="clubID" Mode="In" Type="Int32" />
+      <Parameter Name="eventID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="insertCommittee">
+      <Parameter Name="committee_name" Mode="In" Type="String" />
+      <Parameter Name="job_description" Mode="In" Type="String" />
+      <Parameter Name="committee_leader" Mode="In" Type="Int32" />
+      <Parameter Name="numberOfMembers" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="insertCommitteeMember">
+      <Parameter Name="studentID" Mode="In" Type="Int32" />
+      <Parameter Name="memberCommittee" Mode="In" Type="Int32" />
+      <Parameter Name="class_represented" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="insertCommitteeProgram">
+      <Parameter Name="commiteeID" Mode="In" Type="Int32" />
+      <Parameter Name="eventID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="insertExecutive">
+      <Parameter Name="studentID" Mode="In" Type="Int32" />
+      <Parameter Name="position" Mode="In" Type="String" />
+      <Parameter Name="staffPartner" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="insertProgram">
+      <Parameter Name="eventName" Mode="In" Type="String" />
+      <Parameter Name="dateOrganized" Mode="In" Type="DateTime" />
+      <Parameter Name="programCost" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="insertStakeholder">
+      <Parameter Name="stakeholder_name" Mode="In" Type="String" />
+      <Parameter Name="engagementPurpose" Mode="In" Type="String" />
+      <Parameter Name="dateEngaged" Mode="In" Type="DateTime" />
+      <Parameter Name="email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="insertStudentLeader">
+      <Parameter Name="studentID" Mode="In" Type="Int32" />
+      <Parameter Name="firstName" Mode="In" Type="String" />
+      <Parameter Name="lastName" Mode="In" Type="String" />
+      <Parameter Name="gender" Mode="In" Type="String" />
+      <Parameter Name="major" Mode="In" Type="String" />
+      <Parameter Name="gpa" Mode="In" Type="Decimal" />
+      <Parameter Name="email" Mode="In" Type="String" />
+      <Parameter Name="phoneNumber" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="insertStudentLeaderStakeholder">
+      <Parameter Name="studentID" Mode="In" Type="Int32" />
+      <Parameter Name="stakeholderID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="LeaderDetails" ReturnType="Collection(FKM52802019Model.LeaderDetails_Result)">
+      <Parameter Name="studentName" Mode="In" Type="String" />
+      <Parameter Name="studid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="performanceReport" ReturnType="Collection(FKM52802019Model.performanceReport_Result)" />
+    <FunctionImport Name="reportSalary" ReturnType="Collection(FKM52802019Model.reportSalary_Result)" />
+    <FunctionImport Name="SemesterClubEvents" ReturnType="Collection(FKM52802019Model.SemesterClubEvents_Result)" />
+  </EntityContainer>
+  <ComplexType Name="assetvalue_Result">
+    <Property Type="Int32" Name="assetNo" Nullable="false" />
+    <Property Type="String" Name="assetname" Nullable="true" MaxLength="255" />
+    <Property Type="Decimal" Name="monetaryValue" Nullable="true" Precision="18" Scale="0" />
+    <Property Type="String" Name="AssetManager" Nullable="false" MaxLength="511" />
+  </ComplexType>
+  <ComplexType Name="CommitteeEvents_Result">
+    <Property Type="String" Name="committee_name" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="eventName" Nullable="false" MaxLength="255" />
+    <Property Type="Decimal" Name="programCost" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="DateTime" Name="dateOrganized" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getclassrepresentations_Result">
+    <Property Type="Int32" Name="numberOfStudents" Nullable="true" />
+    <Property Type="Int32" Name="class_represented" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getStakeholderDetails_Result">
+    <Property Type="String" Name="stakeholder_name" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="engagementPurpose" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="contact" Nullable="true" MaxLength="320" />
+    <Property Type="DateTime" Name="dateEngaged" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="LeaderDetails_Result">
+    <Property Type="Int32" Name="studentID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="512" />
+    <Property Type="String" Name="email" Nullable="true" MaxLength="320" />
+    <Property Type="String" Name="phoneNumber" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="gender" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="performanceReport_Result">
+    <Property Type="Int32" Name="studentID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="511" />
+    <Property Type="Decimal" Name="gpa" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="String" Name="major" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Contact" Nullable="true" MaxLength="320" />
+    <Property Type="String" Name="performanceReport" Nullable="false" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="reportSalary_Result">
+    <Property Type="Int32" Name="Student" Nullable="false" />
+    <Property Type="String" Name="studentName" Nullable="false" MaxLength="255" />
+    <Property Type="Decimal" Name="studentSalary" Nullable="true" Precision="38" Scale="0" />
+  </ComplexType>
+  <ComplexType Name="SemesterClubEvents_Result">
+    <Property Type="String" Name="eventName" Nullable="false" MaxLength="255" />
+    <Property Type="Decimal" Name="programCost" Nullable="false" Precision="18" Scale="0" />
+    <Property Type="DateTime" Name="dateOrganized" Nullable="true" />
+    <Property Type="String" Name="clubName" Nullable="true" MaxLength="255" />
+  </ComplexType>
+</Schema>

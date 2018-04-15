@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -Rongai SORU</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:saddlebrown">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("S O R U", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Assets", "Index", "assets")</li>
+                    <li>@Html.ActionLink("Stakeholders", "Index", "Stakeholders")</li>
+                    <li>@Html.ActionLink("Events", "Index", "Programs")</li>
+                    <li>@Html.ActionLink("Committees", "Index", "Committees")</li>
+                    <li>@Html.ActionLink("Clubs", "Index", "Clubs")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Leaders <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Student Leaders", "Index", "StudentLeaders")</li>
+                            <li>@Html.ActionLink("Executives", "Index", "Executives")</li>
+                            <li>@Html.ActionLink("Committee Members", "Index", "CommitteeMembers")</li>
+                            <li>@Html.ActionLink("Club Head", "Index", "ClubHeads")</li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+   <div class="body-content">
+        @RenderBody()
+        <hr />
+        <footer style="color:white;background-color:saddlebrown;width:1365px; bottom: 0;margin-left:-19px">
+            <center>
+                <p>©Rongai University</p>
+                <p>1 University Avenue, Rongai; Po Box 12, Haiti</p>
+                <p>Phone: +1.302.610.330   OR   +1­ ‌302 974 980</p>
+                <p>Email: info@soru.edu.gh</p>
+                <br /><br />
+                <p>&copy; @DateTime.Now.Year - Rongai University</p>
+            </center>
+                
+
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

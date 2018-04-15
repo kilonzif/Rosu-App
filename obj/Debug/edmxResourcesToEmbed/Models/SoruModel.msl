@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FKM52802019ModelStoreContainer" CdmEntityContainer="FKM52802019Entities2">
+    <EntitySetMapping Name="assets">
+      <EntityTypeMapping TypeName="FKM52802019Model.asset">
+        <MappingFragment StoreEntitySet="asset">
+          <ScalarProperty Name="assetNo" ColumnName="assetNo" />
+          <ScalarProperty Name="assetname" ColumnName="assetname" />
+          <ScalarProperty Name="functionality" ColumnName="functionality" />
+          <ScalarProperty Name="monetaryValue" ColumnName="monetaryValue" />
+          <ScalarProperty Name="assetManager" ColumnName="assetManager" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clubs">
+      <EntityTypeMapping TypeName="FKM52802019Model.Club">
+        <MappingFragment StoreEntitySet="Club">
+          <ScalarProperty Name="clubID" ColumnName="clubID" />
+          <ScalarProperty Name="clubName" ColumnName="clubName" />
+          <ScalarProperty Name="yearFounded" ColumnName="yearFounded" />
+          <ScalarProperty Name="clubHead" ColumnName="clubHead" />
+          <ScalarProperty Name="industryField" ColumnName="industryField" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clubHeads">
+      <EntityTypeMapping TypeName="FKM52802019Model.clubHead">
+        <MappingFragment StoreEntitySet="clubHead">
+          <ScalarProperty Name="clubheadID" ColumnName="clubheadID" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="salaryAllowance" ColumnName="salaryAllowance" />
+          <ScalarProperty Name="departmentPartner" ColumnName="departmentPartner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Committees">
+      <EntityTypeMapping TypeName="FKM52802019Model.Committee">
+        <MappingFragment StoreEntitySet="Committee">
+          <ScalarProperty Name="commiteeID" ColumnName="commiteeID" />
+          <ScalarProperty Name="committee_name" ColumnName="committee_name" />
+          <ScalarProperty Name="job_description" ColumnName="job_description" />
+          <ScalarProperty Name="committee_leader" ColumnName="committee_leader" />
+          <ScalarProperty Name="numberOfMembers" ColumnName="numberOfMembers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommitteeMembers">
+      <EntityTypeMapping TypeName="FKM52802019Model.CommitteeMember">
+        <MappingFragment StoreEntitySet="CommitteeMember">
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="memberCommittee" ColumnName="memberCommittee" />
+          <ScalarProperty Name="class_represented" ColumnName="class_represented" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Executives">
+      <EntityTypeMapping TypeName="FKM52802019Model.Executive">
+        <MappingFragment StoreEntitySet="Executive">
+          <ScalarProperty Name="executiveID" ColumnName="executiveID" />
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="staffPartner" ColumnName="staffPartner" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Programs">
+      <EntityTypeMapping TypeName="FKM52802019Model.Program">
+        <MappingFragment StoreEntitySet="Program">
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+          <ScalarProperty Name="eventName" ColumnName="eventName" />
+          <ScalarProperty Name="dateOrganized" ColumnName="dateOrganized" />
+          <ScalarProperty Name="programCost" ColumnName="programCost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stakeholders">
+      <EntityTypeMapping TypeName="FKM52802019Model.Stakeholder">
+        <MappingFragment StoreEntitySet="Stakeholder">
+          <ScalarProperty Name="stakeholderID" ColumnName="stakeholderID" />
+          <ScalarProperty Name="stakeholder_name" ColumnName="stakeholder_name" />
+          <ScalarProperty Name="engagementPurpose" ColumnName="engagementPurpose" />
+          <ScalarProperty Name="dateEngaged" ColumnName="dateEngaged" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="studentLeaders">
+      <EntityTypeMapping TypeName="FKM52802019Model.studentLeader">
+        <MappingFragment StoreEntitySet="studentLeader">
+          <ScalarProperty Name="studentID" ColumnName="studentID" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="major" ColumnName="major" />
+          <ScalarProperty Name="gpa" ColumnName="gpa" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ClubProgram" TypeName="FKM52802019Model.ClubProgram" StoreEntitySet="ClubProgram">
+      <EndProperty Name="Club">
+        <ScalarProperty Name="clubID" ColumnName="clubID" />
+      </EndProperty>
+      <EndProperty Name="Program">
+        <ScalarProperty Name="eventID" ColumnName="eventID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CommitteeProgram" TypeName="FKM52802019Model.CommitteeProgram" StoreEntitySet="CommitteeProgram">
+      <EndProperty Name="Committee">
+        <ScalarProperty Name="commiteeID" ColumnName="commiteeID" />
+      </EndProperty>
+      <EndProperty Name="Program">
+        <ScalarProperty Name="eventID" ColumnName="eventID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StudentLeaderStakeholder" TypeName="FKM52802019Model.StudentLeaderStakeholder" StoreEntitySet="StudentLeaderStakeholder">
+      <EndProperty Name="Stakeholder">
+        <ScalarProperty Name="stakeholderID" ColumnName="stakeholderID" />
+      </EndProperty>
+      <EndProperty Name="studentLeader">
+        <ScalarProperty Name="studentID" ColumnName="studentID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

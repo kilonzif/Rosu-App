@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FKM52802019Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="asset">
+    <Key>
+      <PropertyRef Name="assetNo" />
+    </Key>
+    <Property Name="assetNo" Type="int" Nullable="false" />
+    <Property Name="assetname" Type="varchar" MaxLength="255" />
+    <Property Name="functionality" Type="varchar" MaxLength="255" />
+    <Property Name="monetaryValue" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="assetManager" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Club">
+    <Key>
+      <PropertyRef Name="clubID" />
+    </Key>
+    <Property Name="clubID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="clubName" Type="varchar" MaxLength="255" />
+    <Property Name="yearFounded" Type="char" MaxLength="4" />
+    <Property Name="clubHead" Type="int" Nullable="false" />
+    <Property Name="industryField" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="clubHead">
+    <Key>
+      <PropertyRef Name="clubheadID" />
+    </Key>
+    <Property Name="clubheadID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="studentID" Type="int" Nullable="false" />
+    <Property Name="salaryAllowance" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="departmentPartner" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FKM52802019.dbo.ClubProgram' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ClubProgram">
+    <Key>
+      <PropertyRef Name="clubID" />
+      <PropertyRef Name="eventID" />
+    </Key>
+    <Property Name="clubID" Type="int" Nullable="false" />
+    <Property Name="eventID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Committee">
+    <Key>
+      <PropertyRef Name="commiteeID" />
+    </Key>
+    <Property Name="commiteeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="committee_name" Type="varchar" MaxLength="255" />
+    <Property Name="job_description" Type="varchar" MaxLength="255" />
+    <Property Name="committee_leader" Type="int" Nullable="false" />
+    <Property Name="numberOfMembers" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CommitteeMember">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="int" Nullable="false" />
+    <Property Name="memberCommittee" Type="int" Nullable="false" />
+    <Property Name="class_represented" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FKM52802019.dbo.CommitteeProgram' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CommitteeProgram">
+    <Key>
+      <PropertyRef Name="commiteeID" />
+      <PropertyRef Name="eventID" />
+    </Key>
+    <Property Name="commiteeID" Type="int" Nullable="false" />
+    <Property Name="eventID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Executive">
+    <Key>
+      <PropertyRef Name="executiveID" />
+    </Key>
+    <Property Name="executiveID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="studentID" Type="int" Nullable="false" />
+    <Property Name="position" Type="varchar" MaxLength="255" />
+    <Property Name="staffPartner" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Program">
+    <Key>
+      <PropertyRef Name="eventID" />
+    </Key>
+    <Property Name="eventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="eventName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="dateOrganized" Type="date" />
+    <Property Name="programCost" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stakeholder">
+    <Key>
+      <PropertyRef Name="stakeholderID" />
+    </Key>
+    <Property Name="stakeholderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="stakeholder_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="engagementPurpose" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="dateEngaged" Type="date" />
+    <Property Name="email" Type="varchar" MaxLength="320" />
+  </EntityType>
+  <EntityType Name="studentLeader">
+    <Key>
+      <PropertyRef Name="studentID" />
+    </Key>
+    <Property Name="studentID" Type="int" Nullable="false" />
+    <Property Name="firstName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="lastName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="gender" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="major" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="gpa" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="320" />
+    <Property Name="phoneNumber" Type="char" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FKM52802019.dbo.StudentLeaderStakeholder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="StudentLeaderStakeholder">
+    <Key>
+      <PropertyRef Name="studentID" />
+      <PropertyRef Name="stakeholderID" />
+    </Key>
+    <Property Name="studentID" Type="int" Nullable="false" />
+    <Property Name="stakeholderID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Club__clubHead__29572725">
+    <End Role="clubHead" Type="Self.clubHead" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Club" Type="Self.Club" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clubHead">
+        <PropertyRef Name="clubheadID" />
+      </Principal>
+      <Dependent Role="Club">
+        <PropertyRef Name="clubHead" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__clubHead__studen__267ABA7A">
+    <End Role="studentLeader" Type="Self.studentLeader" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="clubHead" Type="Self.clubHead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="studentLeader">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="clubHead">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClubProgr__clubI__300424B4">
+    <End Role="Club" Type="Self.Club" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ClubProgram" Type="Self.ClubProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Club">
+        <PropertyRef Name="clubID" />
+      </Principal>
+      <Dependent Role="ClubProgram">
+        <PropertyRef Name="clubID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClubProgr__event__30F848ED">
+    <End Role="Program" Type="Self.Program" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ClubProgram" Type="Self.ClubProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="eventID" />
+      </Principal>
+      <Dependent Role="ClubProgram">
+        <PropertyRef Name="eventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Committee__commi__1DE57479">
+    <End Role="Executive" Type="Self.Executive" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Committee" Type="Self.Committee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Executive">
+        <PropertyRef Name="executiveID" />
+      </Principal>
+      <Dependent Role="Committee">
+        <PropertyRef Name="committee_leader" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Committee__commi__2D27B809">
+    <End Role="Committee" Type="Self.Committee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CommitteeProgram" Type="Self.CommitteeProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee">
+        <PropertyRef Name="commiteeID" />
+      </Principal>
+      <Dependent Role="CommitteeProgram">
+        <PropertyRef Name="commiteeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Committee__event__2E1BDC42">
+    <End Role="Program" Type="Self.Program" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CommitteeProgram" Type="Self.CommitteeProgram" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Program">
+        <PropertyRef Name="eventID" />
+      </Principal>
+      <Dependent Role="CommitteeProgram">
+        <PropertyRef Name="eventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Committee__membe__20C1E124">
+    <End Role="Committee" Type="Self.Committee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CommitteeMember" Type="Self.CommitteeMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Committee">
+        <PropertyRef Name="commiteeID" />
+      </Principal>
+      <Dependent Role="CommitteeMember">
+        <PropertyRef Name="memberCommittee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Executive__stude__1B0907CE">
+    <End Role="studentLeader" Type="Self.studentLeader" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Executive" Type="Self.Executive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="studentLeader">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="Executive">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentLe__stake__182C9B23">
+    <End Role="Stakeholder" Type="Self.Stakeholder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="StudentLeaderStakeholder" Type="Self.StudentLeaderStakeholder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stakeholder">
+        <PropertyRef Name="stakeholderID" />
+      </Principal>
+      <Dependent Role="StudentLeaderStakeholder">
+        <PropertyRef Name="stakeholderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentLe__stude__173876EA">
+    <End Role="studentLeader" Type="Self.studentLeader" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="StudentLeaderStakeholder" Type="Self.StudentLeaderStakeholder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="studentLeader">
+        <PropertyRef Name="studentID" />
+      </Principal>
+      <Dependent Role="StudentLeaderStakeholder">
+        <PropertyRef Name="studentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_asset">
+    <End Role="Executive" Type="Self.Executive" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="asset" Type="Self.asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Executive">
+        <PropertyRef Name="executiveID" />
+      </Principal>
+      <Dependent Role="asset">
+        <PropertyRef Name="assetManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FKM52802019ModelStoreContainer">
+    <EntitySet Name="asset" EntityType="Self.asset" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clubHead" EntityType="Self.clubHead" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Committee" EntityType="Self.Committee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommitteeMember" EntityType="Self.CommitteeMember" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Executive" EntityType="Self.Executive" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stakeholder" EntityType="Self.Stakeholder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="studentLeader" EntityType="Self.studentLeader" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClubProgram" EntityType="Self.ClubProgram" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ClubProgram].[clubID] AS [clubID], 
+    [ClubProgram].[eventID] AS [eventID]
+    FROM [dbo].[ClubProgram] AS [ClubProgram]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CommitteeProgram" EntityType="Self.CommitteeProgram" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CommitteeProgram].[commiteeID] AS [commiteeID], 
+    [CommitteeProgram].[eventID] AS [eventID]
+    FROM [dbo].[CommitteeProgram] AS [CommitteeProgram]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="StudentLeaderStakeholder" EntityType="Self.StudentLeaderStakeholder" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [StudentLeaderStakeholder].[studentID] AS [studentID], 
+    [StudentLeaderStakeholder].[stakeholderID] AS [stakeholderID]
+    FROM [dbo].[StudentLeaderStakeholder] AS [StudentLeaderStakeholder]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__Club__clubHead__29572725" Association="Self.FK__Club__clubHead__29572725">
+      <End Role="clubHead" EntitySet="clubHead" />
+      <End Role="Club" EntitySet="Club" />
+    </AssociationSet>
+    <AssociationSet Name="FK__clubHead__studen__267ABA7A" Association="Self.FK__clubHead__studen__267ABA7A">
+      <End Role="studentLeader" EntitySet="studentLeader" />
+      <End Role="clubHead" EntitySet="clubHead" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClubProgr__clubI__300424B4" Association="Self.FK__ClubProgr__clubI__300424B4">
+      <End Role="Club" EntitySet="Club" />
+      <End Role="ClubProgram" EntitySet="ClubProgram" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClubProgr__event__30F848ED" Association="Self.FK__ClubProgr__event__30F848ED">
+      <End Role="Program" EntitySet="Program" />
+      <End Role="ClubProgram" EntitySet="ClubProgram" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Committee__commi__1DE57479" Association="Self.FK__Committee__commi__1DE57479">
+      <End Role="Executive" EntitySet="Executive" />
+      <End Role="Committee" EntitySet="Committee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Committee__commi__2D27B809" Association="Self.FK__Committee__commi__2D27B809">
+      <End Role="Committee" EntitySet="Committee" />
+      <End Role="CommitteeProgram" EntitySet="CommitteeProgram" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Committee__event__2E1BDC42" Association="Self.FK__Committee__event__2E1BDC42">
+      <End Role="Program" EntitySet="Program" />
+      <End Role="CommitteeProgram" EntitySet="CommitteeProgram" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Committee__membe__20C1E124" Association="Self.FK__Committee__membe__20C1E124">
+      <End Role="Committee" EntitySet="Committee" />
+      <End Role="CommitteeMember" EntitySet="CommitteeMember" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Executive__stude__1B0907CE" Association="Self.FK__Executive__stude__1B0907CE">
+      <End Role="studentLeader" EntitySet="studentLeader" />
+      <End Role="Executive" EntitySet="Executive" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentLe__stake__182C9B23" Association="Self.FK__StudentLe__stake__182C9B23">
+      <End Role="Stakeholder" EntitySet="Stakeholder" />
+      <End Role="StudentLeaderStakeholder" EntitySet="StudentLeaderStakeholder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentLe__stude__173876EA" Association="Self.FK__StudentLe__stude__173876EA">
+      <End Role="studentLeader" EntitySet="studentLeader" />
+      <End Role="StudentLeaderStakeholder" EntitySet="StudentLeaderStakeholder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_asset" Association="Self.FK_asset">
+      <End Role="Executive" EntitySet="Executive" />
+      <End Role="asset" EntitySet="asset" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

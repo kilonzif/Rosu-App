@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Rosu.Models.asset>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p class="btn btn-success">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.assetname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.functionality)
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.monetaryValue)
+
+        </th>
+        <th>
+            Asset Manager
+            @*Html.DisplayNameFor(model => model.Executive.position)*@
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.assetname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.functionality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.monetaryValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Executive.studentLeader.firstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.assetNo }, new { @class = "btn btn-default" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.assetNo }, new { @class = "btn btn-default" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.assetNo }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+    }
+
+</table>

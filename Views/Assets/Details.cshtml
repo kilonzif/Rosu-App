@@ -1,0 +1,50 @@
+﻿@model Rosu.Models.asset
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>asset</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.assetname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.assetname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.functionality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.functionality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.monetaryValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monetaryValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Executive.position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Executive.position)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.assetNo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

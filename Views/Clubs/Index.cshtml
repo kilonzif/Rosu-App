@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Rosu.Models.Club>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p class="btn btn-success">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.clubName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.yearFounded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.industryField)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.clubHead1.studentLeader.firstName)
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.clubName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.yearFounded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.industryField)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.clubHead1.departmentPartner)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.clubID }, new { @class = "btn btn-default" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.clubID }, new { @class = "btn btn-default" }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.clubID }, new { @class = "btn btn-danger" })
+        </td>>
+    </tr>
+    }
+
+</table>
